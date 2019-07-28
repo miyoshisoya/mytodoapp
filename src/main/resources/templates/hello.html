@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Show To do list </title>
+</head>
+<body>
+    <div>
+        <a class="btn btn-default" th:href="@{/todos/{id}/edit(id=*{id})}">編集</a>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-link" href="/todos">一覧画面へ</a>
+    </div>
+</body>
+</html>
