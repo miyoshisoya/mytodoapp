@@ -20,6 +20,10 @@
             <label>名前</label>
             <p th:text="*{name}"></p>
         </div>
+        <div>
+            <label>Deadline</label>
+            <p th:text="*{deadline}"></p>
+        </div>
         <button class="btn btn-default" th:href="@{/todos/{id}/edit(id=*{id})}">編集</button>
     </div>
 
