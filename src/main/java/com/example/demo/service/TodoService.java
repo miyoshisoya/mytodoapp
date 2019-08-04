@@ -10,7 +10,6 @@ import com.example.demo.repository.TodoRepository;
 
 @Service
 public class TodoService {
-    // ①
     @Autowired
     private TodoRepository todoRepository;
 
@@ -29,4 +28,5 @@ public class TodoService {
     public void delete(Long id) {
         todoRepository.deleteById(id);
     }
+
 }
