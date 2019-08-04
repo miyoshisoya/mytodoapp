@@ -17,6 +17,8 @@
             <th>ID</th>
             <th>名前</th>
             <th>Deadline</th>
+            <th>isDone</th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -27,13 +29,18 @@
             <td th:text="*{id}"></td>
             <td th:text="*{name}"></td>
             <td th:text="*{deadline}"></td>
+            <td th:text="*{isDone}"></td>
 
             <td><a class="btn btn-default btn-xs" th:href="@{/todos/{id}(id=*{id})}">参照</a></td>
             <td><a class="btn btn-default btn-xs" th:href="@{/todos/{id}/edit(id=*{id})}">編集</a></td>
             <td>
-                <!-- ⑤ -->
                 <form th:action="@{/todos/{id}(id=*{id})}" th:method="delete">
                     <input class="btn btn-default btn-xs" type="submit" value="削除" />
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/todos/{id}(id=*{id})}" th:method="post" th:object="${todo}">
+                    <input class="btn btn-default btn-xs" type="submit" value="終了" />
                 </form>
             </td>
         </tr>

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.example.demo.domein.Todo;
 import com.example.demo.service.TodoService;
 
@@ -52,6 +51,14 @@ public class TodoController {
     public String create(@ModelAttribute Todo todo) { // ⑥
         todoService.save(todo);
         return "redirect:/todos"; // ⑦
+    }
+
+
+    @PostMapping("{id}")
+    public String done(@ModelAttribute Todo todo) {
+        todo.setDone();
+        todoService.save(todo);
+        return "redirect:/todos";
     }
 
     @PutMapping("{id}")
