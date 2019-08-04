@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 @Entity // ①
 public class Todo {
@@ -11,6 +15,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ③
     private Long id;
     private String name;
+    private String deadline;
 
     public Long getId() {
         return id;
@@ -24,10 +29,17 @@ public class Todo {
     public void setName(String name) {
         this.name = name;
     }
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
 
     @Override
     public String toString() {
-        return "Player [id=" + id + ", name=" + name +  "]";
+        return "Todo [id=" + id + ", name=" + name + ", deadline=" + deadline + "]";
     }
 }
 
