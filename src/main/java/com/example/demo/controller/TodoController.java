@@ -20,7 +20,7 @@ import com.example.demo.repository.TodoRepository;
 import com.example.demo.service.TodoService;
 
 @Controller
-@RequestMapping("/todos")
+@RequestMapping("")
 public class TodoController {
     @Autowired
     private TodoService todoService;
@@ -28,46 +28,56 @@ public class TodoController {
     @Autowired
     TodoRepository todoRepository;
 
-    @GetMapping
+    @GetMapping("/")
+    public String home(Model model) {
+        return "todos/home";
+    }
+
+    @GetMapping("/todos")
     public String index(Model model) {
         List<Todo> todos = todoService.findAll();
         model.addAttribute("todos", todos); 
         return "todos/index"; 
     }
 
-    @PostMapping("search")
+    @GetMapping("/todos/search")
+    public String search_and_see_screen(Model model) {
+      return "todos/search_and_see";
+    }
+
+    @PostMapping("/todos/search")
     public String search(Model model, @RequestParam String query) {
       List<Todo> todos = todoRepository.findTodosByName(query);
       model.addAttribute("todos", todos); 
-      return "todos/search_result";
+      return "todos/search_and_see";
     }
 
-    @GetMapping("new")
+    @GetMapping("/todos/new")
     public String newTodo(Model model) {
         return "todos/new";
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("/todos/{id}/edit")
     public String edit(@PathVariable Long id, Model model) { 
         Todo todo = todoService.findOne(id);
         model.addAttribute("todo", todo);
         return "todos/edit";
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/todos/{id}")
     public String show(@PathVariable Long id, Model model) {
         Todo todo = todoService.findOne(id);
         model.addAttribute("todo", todo);
         return "todos/show";
     }
 
-    @PostMapping
+    @PostMapping("/todos/new")
     public String create(@ModelAttribute Todo todo) { 
         todoService.save(todo);
         return "redirect:/todos"; 
     }
 
-    @PutMapping("{id}")
+    @PostMapping("/todos/{id}")
     public String done(@PathVariable Long id) {
         Todo todo = todoService.findOne(id);
         todo.setDone();
@@ -75,7 +85,14 @@ public class TodoController {
         return "redirect:/todos";
     }
 
-    @DeleteMapping("{id}")
+    @PutMapping("/todos/{id}")
+    public String update(@PathVariable Long id, @ModelAttribute Todo todo) {
+        todo.setId(id);
+        todoService.save(todo);
+        return "redirect:/todos";
+    }
+
+    @DeleteMapping("/todos/{id}")
     public String destroy(@PathVariable Long id) {
         todoService.delete(id);
         return "redirect:/todos";
