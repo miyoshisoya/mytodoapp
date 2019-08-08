@@ -9,18 +9,6 @@
 </head>
 <body>
 
-<div class="row">
-        <div class="col-md-6">
-            <form th:action="@{/todos/search}" th:method="post">
-            <div class="input-group">
-                <input type="text" name="query" class="form-control" placeholder="Search for..." />
-                <span class="input-group-btn">
-                <input class="btn btn-default" type="submit" value="search" />
-                </span>
-            </div>
-            </form>
-        </div>
-</div>
 
 <div class="container">
     <h1>Listing Todos</h1>
@@ -28,9 +16,9 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Item</th>
+            <th>名前</th>
             <th>Deadline</th>
-            <th>Finished?</th>
+            <th>isDone</th>
             <th></th>
             <th></th>
             <th></th>
@@ -52,14 +40,13 @@
                 </form>
             </td>
             <td>
-                <form th:action="@{/todos/{id}(id=*{id})}" th:method="put">
+                <form th:action="@{/todos/{id}(id=*{id})}" th:method="post" th:object="${todo}">
                     <input class="btn btn-default btn-xs" type="submit" value="終了" />
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-default" href="/todos/new">Add</a>
 </div>
 </body>
 </html>

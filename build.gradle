@@ -20,6 +20,7 @@ repositories {
     mavenCentral()
 }
 
+// 間違ってH2とか入れちゃだめです
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
