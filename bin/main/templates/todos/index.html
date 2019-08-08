@@ -2,35 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <title>Listing Todos</title>
+    <title>Todos リスト</title>
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
 </head>
 <body>
 
-<div class="row">
-        <div class="col-md-6">
-            <form th:action="@{/todos/search}" th:method="post">
-            <div class="input-group">
-                <input type="text" name="query" class="form-control" placeholder="Search for..." />
-                <span class="input-group-btn">
-                <input class="btn btn-default" type="submit" value="search" />
-                </span>
-            </div>
-            </form>
-        </div>
-</div>
-
 <div class="container">
     <h1>Listing Todos</h1>
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Item</th>
-            <th>Deadline</th>
-            <th>Finished?</th>
+            <th>名前</th>
+            <th>期限</th>
+            <th>完了？</th>
             <th></th>
             <th></th>
             <th></th>
@@ -39,7 +25,6 @@
         </thead>
         <tbody>
         <tr th:each="todo:${todos}" th:object="${todo}">
-            <td th:text="*{id}"></td>
             <td th:text="*{name}"></td>
             <td th:text="*{deadline}"></td>
             <td th:text="*{isDone}"></td>
@@ -52,14 +37,14 @@
                 </form>
             </td>
             <td>
-                <form th:action="@{/todos/{id}(id=*{id})}" th:method="put">
-                    <input class="btn btn-default btn-xs" type="submit" value="終了" />
+                <form th:action="@{/todos/{id}(id=*{id})}" th:method="post">
+                    <input class="btn btn-default btn-xs" type="submit" value="完了した!" />
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-default" href="/todos/new">Add</a>
+    <a class="btn btn-default" href="/todos/new">新しいTodoを追加</a>
 </div>
 </body>
 </html>

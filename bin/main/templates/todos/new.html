@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <title>New Todo - New entry </title>
+    <title>新しいTodoを入力 </title>
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
 </head>
 <body>
 <div class="container">
-    <h1>New Todo</h1>
-    <form th:action="@{/todos}" th:method="post">
+    <h1>新しいTodo</h1>
+    <form th:action="@{/todos/new}" th:method="post">
         <div class="form-group">
             <label class="control-label">名前</label>
             <input class="form-control" type="text" name="name" />
