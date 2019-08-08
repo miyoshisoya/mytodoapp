@@ -29,9 +29,9 @@ public class TodoService {
         todoRepository.deleteById(id);
     }
 
-    
+    /*
     public List<Todo> findTodos(String query) {
-        return todoRepository.findTodos("%" + query+ "%");
-    }
+        return todoRepository.findByTodos("%" + query+ "%");
+    }*/
 
 }
