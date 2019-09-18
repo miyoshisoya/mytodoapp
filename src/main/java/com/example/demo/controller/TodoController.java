@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import com.example.demo.domein.Todo;
 import com.example.demo.repository.TodoRepository;
 import com.example.demo.service.TodoService;
+
+import javax.imageio.ImageIO;
 
 @Controller
 @RequestMapping("")
@@ -37,7 +44,7 @@ public class TodoController {
     public String index(Model model) {
         List<Todo> todos = todoService.findAll();
         model.addAttribute("todos", todos); 
-        return "todos/index"; 
+        return "/todos/upload";
     }
 
     @GetMapping("/todos/search")
@@ -89,6 +96,17 @@ public class TodoController {
     public String update(@PathVariable Long id, @ModelAttribute Todo todo) {
         todo.setId(id);
         todoService.save(todo);
+        return "redirect:/todos";
+    }
+
+    @PostMapping("/upload")
+    public String handleFormUpload( @RequestParam("file") MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+            File destination = new File("/Users/miyoshisoya/j/mytodoapp/src/main/resources/stored/" + file.getOriginalFilename() + ".jpg"); // something like C:/Users/tom/Documents/nameBasedOnSomeId.png
+            ImageIO.write(src, "jpg", destination);
+            //Save the id you have used to create the file name in the DB. You can retrieve the image in future with the ID.
+        }
         return "redirect:/todos";
     }
 
