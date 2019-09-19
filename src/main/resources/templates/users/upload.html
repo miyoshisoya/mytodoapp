@@ -9,15 +9,12 @@
 </head>
 <body>
 <div class="container">
-    <h1>新しいTodo</h1>
+    <h1>新しい画像をアップロード</h1>
     <form th:action="@{/upload}" th:method="post" enctype="multipart/form-data">
-        Please select a file to upload : <input type="file" name="file" />
+        File : <input type="file" name="file" required/>
+        username : <input type="text" name="username" value="anonymoustarou" required/>
         <input type="submit" value="upload" />
     </form>
-
-    <div class="pull-right">
-        <a class="btn btn-link" href="/todos">一覧画面へ</a>
-    </div>
 </div>
 </body>
 </html>
